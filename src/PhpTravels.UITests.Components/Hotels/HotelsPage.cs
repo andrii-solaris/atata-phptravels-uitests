@@ -13,6 +13,10 @@ namespace PhpTravels.UITests.Components
         [FindByClass("xcrud-list")]
         public Table<HotelRow, _> Hotels { get; private set; }
 
+        [FindByXPath("//tr/td[12]/span/a[2]")]
+        [FindFirst]
+        public Link<HotelEditPage, _> EditButton { get; private set; }
+
         public class HotelRow : TableRow<_>
         {
             public Text<_> Name { get; private set; }
