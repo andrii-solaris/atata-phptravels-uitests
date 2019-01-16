@@ -24,13 +24,15 @@ param
     [String] $Platform = "Any CPU",
 
     [Parameter()]
-    [String] $OutputPath ="src\PhpTravels.UITests\bin\Debug"
+    [String] $OutputPath ="src\PhpTravels.UITests\bin\Debug",
+
+    [Parameter()] 
+    [String] $Solution = "src\PhpTravels.UITests.sln"
 )
 
 $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 $NugetExe = Join-Path $PSScriptRoot "nuget.exe"
 $MSBuildExe = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
-$Solution = "src/PhpTravels.UITests.sln"
 $NUnitConsoleExe = "C:\Program Files (x86)\NUnit.org\nunit-console\nunit3-console.exe"
 # Define additional variables here (MSBuild path, etc.)
 
