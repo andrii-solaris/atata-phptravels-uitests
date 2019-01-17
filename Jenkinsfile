@@ -6,7 +6,7 @@ properties([
 
 def isFailed = false
 def branch = params.branchName
-def buildArtifactsFolder = "C:/BuildPackagesFromPipeline/$BUILD_ID/Debug"
+def buildArtifactsFolder = "C:/BuildPackagesFromPipeline/$BUILD_ID"
 currentBuild.description = "Branch: $branch"
 
 def RunNUnitTests(String pathToDll, String condition, String reportName)
@@ -51,11 +51,11 @@ catchError
     {
         parallel FirstTest: {
             node('master') {
-                RunNUnitTests("$buildArtifactsFolder/PhpTravels.UITests.Components.dll", "--where cat==FirstTest", "TestResult1.xml")
+                RunNUnitTests("$buildArtifactsFolder/Debug/PhpTravels.UITests.Components.dll", "--where cat==FirstTest", "TestResult1.xml")
             }
         }, SecondTest: {
             node('Slave') {
-                RunNUnitTests("$buildArtifactsFolder/PhpTravels.UITests.Components.dll", "--where cat==SecondTest", "TestResult2.xml")
+                RunNUnitTests("$buildArtifactsFolder/Debug/PhpTravels.UITests.Components.dll", "--where cat==SecondTest", "TestResult2.xml")
             }
         }
     }
