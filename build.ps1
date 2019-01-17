@@ -13,9 +13,7 @@ param
     # Use /p swith to pass the parameter. For example:
     #   MSBuild.exe src/Solution.sln /p:Configuration=$Configuration
     # More info here: https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties?view=vs-2017
-
-    [Parameter()]
-    [String] $BuildArtifactsFolder,
+    
 
     [Parameter()]
     [String] $Configuration = "Debug",
@@ -27,13 +25,15 @@ param
     [String] $OutputPath ="src\PhpTravels.UITests\bin\Debug",
 
     [Parameter()] 
-    [String] $Solution = "src\PhpTravels.UITests.sln"
+    [String] $Solution = "src/PhpTravels.UITests.sln",
+
+    [Parameter()]
+    [String] $BuildArtifactsFolder
 )
 
 $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 $NugetExe = Join-Path $PSScriptRoot "nuget.exe"
 $MSBuildExe = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
-$NUnitConsoleExe = "C:\Program Files (x86)\NUnit.org\nunit-console\nunit3-console.exe"
 # Define additional variables here (MSBuild path, etc.)
 
 Function DownloadNuGet()
@@ -63,7 +63,7 @@ Function BuildSolution()
     Write-Output "Building '$Solution' solution..."
 
     # MSBuild.exe call here
-    & $MSBuildExe $Solution /p:Configuration=$Configuration /p:Platform=$Platform
+    & $MSBuildExe $Solution /p:Configuration=$Configuration /p:Platform=$Platform /p:OutputPath=$OutputPath
      if($LASTEXITCODE -ne 0){
         Throw "An error occured while building solution."
     }
