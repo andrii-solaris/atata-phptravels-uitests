@@ -63,7 +63,7 @@ Function BuildSolution()
     Write-Output "Building '$Solution' solution..."
 
     # MSBuild.exe call here
-    & $MSBuildExe $Solution /p:Configuration=$Configuration /p:Platform=$Platform /p:OutputPath=$OutputPath
+    & $MSBuildExe $Solution /p:Configuration=$Configuration /p:Platform=$Platform 
      if($LASTEXITCODE -ne 0){
         Throw "An error occured while building solution."
     }
